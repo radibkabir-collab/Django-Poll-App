@@ -1,3 +1,11 @@
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+
+<div id="content" hx-get="hello/" hx-trigger="load">
+    Loading...
+</div>
+
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
