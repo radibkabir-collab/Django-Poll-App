@@ -70,4 +70,4 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse("polls:results", args=(ques.id,)))
 
 def hello(request):
-    return HttpResponse("<p>Hello from Django!</p>")
+    return HttpResponse("Welcome to POLL app!<br>")

@@ -1,15 +1,17 @@
 <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
+<button hx-get="{% url 'polls:hello' %}" hx-target="#content" hx-swap="innerHTML">
+    Click me
+</button>
 
-<div id="content" hx-get="hello/" hx-trigger="load">
+<div id="content">
     Loading...
 </div>
-
 
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a> -- <small>Publish Date : {{question.pub_date}}</small></li>
     {% endfor %}
     </ul>
 {% else %}
