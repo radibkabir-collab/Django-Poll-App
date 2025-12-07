@@ -3,8 +3,19 @@ from django.http import HttpResponse, HttpResponseRedirect # pyright: ignore[rep
 from django.http import Http404 # type: ignore
 from django.db.models import F  # type: ignore
 from django.urls import reverse
-from django.views.generic import ListView, DetailView  # type: ignore
+from django.utils import timezone
+from django.views.generic import ListView, DetailView, CreateView  # type: ignore
+from django.forms import inlineformset_factory
 from .models import Question, Choice
+
+
+# Creates 4 choice input fields linked to a Question
+ChoiceFormSet = inlineformset_factory(
+    Question,          # Parent model
+    Choice,            # Child model  
+    fields=['choice_text'],  # Which field to show
+    extra=4,           # Show 4 empty forms
+)
 
 
 # def index(request):
@@ -71,3 +82,34 @@ def vote(request, question_id):
 
 def hello(request):
     return HttpResponse("Welcome to POLL app!<br>")
+
+
+class QuestionCreateView(CreateView):
+    model = Question
+    fields = ['question_text']  # Which fields to show in the form
+    template_name = "polls/create_question.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['choice_formset'] = ChoiceFormSet(self.request.POST)
+        else:
+            context['choice_formset'] = ChoiceFormSet()
+        return context
+    
+    def form_valid(self, form):
+        context = self.get_context_data()
+        choice_formset = context['choice_formset']
+        
+        if choice_formset.is_valid():
+            # Save the question first
+            form.instance.pub_date = timezone.now()
+            self.object = form.save()
+            
+            # Now save the choices with the question reference
+            choice_formset.instance = self.object
+            choice_formset.save()
+            
+            return HttpResponseRedirect(reverse('polls:index'))
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
