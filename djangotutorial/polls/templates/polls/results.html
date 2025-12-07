@@ -6,7 +6,9 @@
 {% endfor %}
 </ul>
 
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a><br>
+<form method="get" action="{% url 'polls:detail' question.id %}">
+    <button type="submit">Vote again?</button>
+</form>
 <form method="get" action="{% url 'polls:index' %}">
     <button type="submit">Go Home</button>
 </form>
