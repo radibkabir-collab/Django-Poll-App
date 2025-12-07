@@ -1,20 +1,13 @@
 <h2>Create New Poll</h2>
-<p><a href="{% url 'polls:index' %}">Back to Polls</a></p>
+<p><a href="{% url 'polls:index' %}"><button type="button">Back to Polls</button></a></p>
 
 <form method="post">
     {% csrf_token %}
-    <p>
-        <label>Question:</label><br>
-        {{ form.question_text }}
-    </p>
+    {{ form.as_p }}
+
     <h3>Choices</h3>
     {{ choice_formset.management_form }}
-    {% for choice_form in choice_formset %}
-        <p>
-            Choice {{ forloop.counter }}: {{ choice_form.choice_text }}
-        </p>
-    {% endfor %}
-    <p>
-        <button type="submit">Create Poll</button>
-    </p>
+    {{ choice_formset.as_p }}
+
+    <button type="submit">Create Poll</button>
 </form>

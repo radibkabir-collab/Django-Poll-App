@@ -2,9 +2,9 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404  # type:
 from django.http import HttpResponse, HttpResponseRedirect # pyright: ignore[reportMissingModuleSource]
 from django.http import Http404 # type: ignore
 from django.db.models import F  # type: ignore
-from django.urls import reverse
+from django.urls import reverse_lazy, reverse
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, CreateView  # type: ignore
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, TemplateView # type: ignore
 from django.forms import inlineformset_factory
 from .models import Question, Choice
 
@@ -15,6 +15,7 @@ ChoiceFormSet = inlineformset_factory(
     Choice,            # Child model  
     fields=['choice_text'],  # Which field to show
     extra=4,           # Show 4 empty forms
+    can_delete=False,
 )
 
 
@@ -88,6 +89,7 @@ class QuestionCreateView(CreateView):
     model = Question
     fields = ['question_text']  # Which fields to show in the form
     template_name = "polls/create_question.html"
+    success_url = reverse_lazy('polls:index')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -98,18 +100,17 @@ class QuestionCreateView(CreateView):
         return context
     
     def form_valid(self, form):
-        context = self.get_context_data()
-        choice_formset = context['choice_formset']
+        # Set publish date and save the question
+        form.instance.pub_date = timezone.now()
+        self.object = form.save()
         
-        if choice_formset.is_valid():
-            # Save the question first
-            form.instance.pub_date = timezone.now()
-            self.object = form.save()
-            
-            # Now save the choices with the question reference
-            choice_formset.instance = self.object
-            choice_formset.save()
-            
-            return HttpResponseRedirect(reverse('polls:index'))
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
+        # Save the choices linked to this question
+        choice_formset = ChoiceFormSet(self.request.POST, instance=self.object)
+        choice_formset.save()
+        
+        return HttpResponseRedirect(self.success_url)
+    
+class QuestionDeleteView(DeleteView):
+    model = Question
+    template_name = "polls/confirm_delete_question.html"
+    success_url = reverse_lazy('polls:index')

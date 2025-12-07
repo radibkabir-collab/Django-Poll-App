@@ -1,8 +1,6 @@
 <h2> Welcome to the POLL app</h2>
 
-<p>
-    <a href="{% url 'polls:create' %}">+ Create New Poll</a>
-</p>
+<a href="{% url 'polls:create' %}"><button type="button">+ Create New Poll</button></a><br><br>
 
 {% if latest_question_list %}
 <table border="1" cellpadding="8" cellspacing="0">
@@ -20,7 +18,7 @@
             <td>{{ question.question_text }}</td>
             <td>{{ question.pub_date }}</td>
             <td>
-                <a href="{% url 'polls:detail' question.id %}">View</a>
+                <a href="{% url 'polls:detail' question.id %}">View</a> -- <a href="{% url 'polls:delete' question.id %}">Delete</a> -- Update
             </td>
         </tr>
         {% endfor %}
