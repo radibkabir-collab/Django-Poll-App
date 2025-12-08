@@ -4,17 +4,26 @@ from django.http import Http404 # type: ignore
 from django.db.models import F  # type: ignore
 from django.urls import reverse_lazy, reverse
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, TemplateView # type: ignore
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView # type: ignore
 from django.forms import inlineformset_factory
 from .models import Question, Choice
 
 
-# Creates 4 choice input fields linked to a Question
+# For creating new questions - shows 4 empty choice fields
 ChoiceFormSet = inlineformset_factory(
-    Question,          # Parent model
-    Choice,            # Child model  
-    fields=['choice_text'],  # Which field to show
-    extra=4,           # Show 4 empty forms
+    Question,
+    Choice,
+    fields=['choice_text'],
+    extra=4,
+    can_delete=False,
+)
+
+# For updating questions - shows only existing choices (no extra empty ones)
+ChoiceUpdateFormSet = inlineformset_factory(
+    Question,
+    Choice,
+    fields=['choice_text'],
+    extra=0,
     can_delete=False,
 )
 
@@ -107,6 +116,38 @@ class QuestionCreateView(CreateView):
         # Save the choices linked to this question
         choice_formset = ChoiceFormSet(self.request.POST, instance=self.object)
         choice_formset.save()
+        
+        return HttpResponseRedirect(self.success_url)
+    
+class QuestionUpdateView(UpdateView):
+    model = Question
+    fields = ['question_text']
+    template_name = "polls/update_question.html"
+    success_url = reverse_lazy('polls:index')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        if self.request.POST:
+            context['choice_formset'] = ChoiceUpdateFormSet(self.request.POST, instance=self.object)
+        else:
+            context['choice_formset'] = ChoiceUpdateFormSet(instance=self.object)
+        return context
+    
+    def form_valid(self, form):
+        self.object = form.save()
+        
+        choice_formset = ChoiceUpdateFormSet(self.request.POST, instance=self.object)
+        
+        # Loop through each choice form
+        for choice_form in choice_formset:
+            # Check if this choice was changed
+            if choice_form.has_changed():
+                choice = choice_form.save(commit=False)
+                choice.votes = 0  # Reset votes to 0
+                choice.save()
+            else:
+                choice_form.save()
         
         return HttpResponseRedirect(self.success_url)
     

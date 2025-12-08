@@ -18,7 +18,7 @@
             <td>{{ question.question_text }}</td>
             <td>{{ question.pub_date }}</td>
             <td>
-                <a href="{% url 'polls:detail' question.id %}">View</a> -- <a href="{% url 'polls:delete' question.id %}">Delete</a> -- Update
+                <a href="{% url 'polls:detail' question.id %}">View</a> -- <a href="{% url 'polls:delete' question.id %}">Delete</a> -- <a href="{% url 'polls:update' question.id %}">Update </a>
             </td>
         </tr>
         {% endfor %}

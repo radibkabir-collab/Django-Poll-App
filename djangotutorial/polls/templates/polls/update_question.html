@@ -1,0 +1,13 @@
+<h2>Update The Poll</h2>
+<p><a href="{% url 'polls:index' %}"><button type="button">Back to Polls</button></a></p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <h3>Choices</h3>
+    {{ choice_formset.management_form }}
+    {{ choice_formset.as_p }}
+
+    <button type="submit"> Update </button>
+</form>
