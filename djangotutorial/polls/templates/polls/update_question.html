@@ -1,13 +1,38 @@
-<h2>Update The Poll</h2>
-<p><a href="{% url 'polls:index' %}"><button type="button">Back to Polls</button></a></p>
+{% load static %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-
-    <h3>Choices</h3>
-    {{ choice_formset.management_form }}
-    {{ choice_formset.as_p }}
-
-    <button type="submit"> Update </button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update Poll</title>
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">Update Poll</h1>
+        
+        <form method="post" class="create-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_question_text">Question</label>
+                {{ form.question_text }}
+            </div>
+            
+            {{ choice_formset.management_form }}
+            
+            {% for choice_form in choice_formset %}
+            <div class="form-group">
+                {{ choice_form.id }}
+                <label>Choice {{ forloop.counter }} </label>
+                {{ choice_form.choice_text }}
+            </div>
+            {% endfor %}
+            
+            <div class="form-buttons">
+                <button type="submit" class="btn">Update Poll</button>
+                <a href="{% url 'polls:index' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

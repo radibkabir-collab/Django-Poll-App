@@ -33,14 +33,17 @@
             <h2>Poll Summary</h2>
             {% for choice in question.choice_set.all %}
             <div class="summary-item">
-                <span class="choice-name">{{ choice.choice_text }}:</span>
+                <span class="choice-name">{{ choice.choice_text }}</span>
                 <span class="vote-count">{{ choice.votes }} vote{{ choice.votes|pluralize }}</span>
             </div>
             {% endfor %}
             
             <div class="action-buttons">
                 <a href="{% url 'polls:index' %}" class="btn">Back to Polls</a>
-                <a href="{% url 'polls:delete' question.id %}" class="btn btn-delete">Delete Poll</a>
+                <div class="action-buttons-right">
+                    <a href="{% url 'polls:update' question.id %}" class="btn btn-update">Update Poll</a>
+                    <a href="{% url 'polls:delete' question.id %}" class="btn btn-delete">Delete Poll</a>
+                </div>
             </div>
         </div>
     </div>

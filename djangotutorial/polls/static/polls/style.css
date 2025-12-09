@@ -21,7 +21,7 @@ body {
 
 
 .page-title {
-    color: #c06815;
+    color: #b46114;
     text-align: center;
     margin-bottom: 4rem;
     font-size: 3.5rem;
@@ -174,7 +174,9 @@ body {
     border: 1px solid #c62828;
     padding: 10px;
     border-radius: 4px;
-    margin-bottom: 15px;
+    max-width: 60%;
+    margin: 0 auto 2rem;
+    text-align: center;
 }
 
 
@@ -224,6 +226,11 @@ body {
     margin-top: 20px;
 }
 
+.action-buttons-right {
+    display: flex;
+    gap: 10px;
+}
+
 .btn-delete {
     background-color: #c2001d;
     color: #ffffff;
@@ -233,4 +240,51 @@ body {
 .btn-delete:hover {
     background-color: #7e0000;
     color: #e6e6e6;
+}
+
+.btn-update {
+    background-color: #1565c0;
+    color: #ffffff;
+    margin-right: 0;
+    border: 2px solid #000000;
+}
+
+.btn-update:hover {
+    background-color: #0d47a1;
+    color: #e6e6e6;
+}
+
+.confirm-box {
+    background-color: #fff9f1;
+    border: 2px solid #c04515;
+    border-radius: 8px;
+    padding: 40px;
+    max-width: 500px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.confirm-title {
+    color: #c04515;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.confirm-question {
+    color: #000000;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.confirm-message {
+    color: #000000;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.confirm-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }

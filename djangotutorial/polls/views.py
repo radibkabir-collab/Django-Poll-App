@@ -91,9 +91,6 @@ def vote(request, question_id):
         selected_choice.save()
         return HttpResponseRedirect(reverse("polls:index"))
 
-def hello(request):
-    return HttpResponse("Welcome to POLL app!<br>")
-
 
 class QuestionCreateView(CreateView):
     model = Question
@@ -140,16 +137,18 @@ class QuestionUpdateView(UpdateView):
             self.object = form.save()
             
             choice_formset = ChoiceUpdateFormSet(self.request.POST, instance=self.object)
-            for choice_form in choice_formset:
-                if not choice_form['choice_text'].value():
-                    continue
-                
-                if choice_form.has_changed():
+            if choice_formset.is_valid():
+                for choice_form in choice_formset:
+                    choice_text = choice_form.cleaned_data.get('choice_text')
+                    if not choice_text:
+                        continue
+                    
                     choice = choice_form.save(commit=False)
-                    choice.votes = 0
+                    choice.question = self.object
+                    # Reset votes to 0 only for new choices or if choice text changed
+                    if not choice.pk or 'choice_text' in choice_form.changed_data:
+                        choice.votes = 0
                     choice.save()
-                else:
-                    choice_form.save()
         
         return HttpResponseRedirect(self.success_url)
     
