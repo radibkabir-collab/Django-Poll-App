@@ -103,7 +103,7 @@ body {
 
 .no-polls {
     color: #000000;
-    background-color: #fff9f1;
+    background-color: #fff9f1d8;
     border: 3px solid #000000;
     border-radius: 8px;
     margin: auto;
@@ -112,6 +112,7 @@ body {
     font-size: 2.5rem;
     text-align: center;
     margin-top: 20px;
+
 }
 
 
