@@ -48,11 +48,15 @@ Remove a poll with a confirmation dialog.
    ```bash
    pip install -r requirements.txt
    ```
-4. Run migrations:
+4. Navigate to the Django project:
+   ```bash
+   cd djangotutorial
+   ```
+5. Run migrations:
    ```bash
    python manage.py migrate
    ```
-4. Start the development server:
+6. Start the development server:
    ```bash
    python manage.py runserver
    ```
