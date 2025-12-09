@@ -1,6 +1,6 @@
 # Django Poll App
 
-A simple polling application built with Django. Users can create polls, vote on them, and view results in real-time.
+A simple polling application built with Django. Users can create or update polls, vote on them, and view results in real-time.
 
 ## Tech Stack
 
@@ -30,7 +30,7 @@ Vote on a poll and view the poll summary with live vote counts.
 
 ### Update Poll
 
-Edit an existing poll's question and choices.
+Edit an existing poll's question and choices. After updating the vote count will reset.
 
 ![Update Poll](Screenshots/poll-update.png)
 
@@ -44,7 +44,11 @@ Remove a poll with a confirmation dialog.
 
 1. Clone the repository
 2. Navigate to the project directory
-3. Run migrations:
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run migrations:
    ```bash
    python manage.py migrate
    ```
@@ -52,18 +56,4 @@ Remove a poll with a confirmation dialog.
    ```bash
    python manage.py runserver
    ```
-5. Open `http://127.0.0.1:8000/polls/` in your browser
-
-## Project Structure
-
-```
-djangotutorial/
-├── manage.py
-├── mysite/          # Project settings
-└── polls/           # Polls application
-    ├── models.py    # Question and Choice models
-    ├── views.py     # View logic
-    ├── urls.py      # URL routing
-    ├── templates/   # HTML templates
-    └── static/      # CSS and images
-```
+5. Open `http://127.0.0.1:8000/` in your browser
