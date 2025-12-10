@@ -3,31 +3,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polls App</title>
     {% comment %} <link rel="stylesheet" href="{% static 'polls/style.css' %}"> {% endcomment %}
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        {% comment %} <h1 class="page-title">Polls</h1> {% endcomment %}
-        <h1 class="text-4xl font-bold">Polls</h1>
+    <div class="max-w-[85%] mx-auto">
+        <h1 class="text-[#0a0500] text-center mb-13 text-[3.5rem] font-extrabold">Polls</h1>
         
-        <div class="cards-container">
+        <div class="flex flex-wrap justify-start gap-14">
             {% for question in latest_question_list %}
-            <div class="card">
-                <h2 class="card-title">{{ question.question_text }}</h2>
-                <a href="{% url 'polls:detail' question.id %}" class="btn">Vote Now</a>
+            <div class="bg-[#fdf3e3] border-4 border-[#c06215] rounded-[15px] py-8 px-10 w-[22%] min-w-[22%] h-80 flex flex-col justify-between items-center">
+                <h2 class="text-black text-[1.8rem] text-center mb-4 font-bold">{{ question.question_text }}</h2>
+                <a href="{% url 'polls:detail' question.id %}" 
+                   class="bg-white text-[#c05915] border-2 border-[#c04b15] py-2 px-5 text-[1.2rem] font-bold no-underline rounded-[7px] cursor-pointer hover:bg-[#fbdfbb]">
+                    Vote Now
+                </a>
             </div>
             {% endfor %}
-            
 
-            <a href="{% url 'polls:create' %}" class="card add-card">
-                <span class="plus-icon">+</span>
+            <a href="{% url 'polls:create' %}" 
+               class="bg-[#fdf3e3] border-4 border-[#c06215] rounded-[15px] p-10 w-[22%] min-w-[22%] h-80 flex justify-center items-center no-underline cursor-pointer hover:bg-[#fbdfbb]">
+                <span class="text-[5rem] text-[#c04515] font-bold">+</span>
             </a>
         </div>
         
         {% if not latest_question_list %}
-        <p class="no-polls">No polls available. Click the + card to create one!</p>
+        <p class="text-black bg-[#fff9f1d8] border-[3px] border-black rounded-lg mx-auto max-w-[60%] p-5 text-[2.5rem] text-center mt-5">
+            No polls available. Click the + card to create one!
+        </p>
         {% endif %}
     </div>
 </body>

@@ -3,33 +3,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Poll</title>
-    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'polls/style.css' %}"> {% endcomment %}
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1 class="page-title">Create New Poll</h1>
+    <div class="max-w-[85%] mx-auto">
+        <h1 class="text-[#0a0500] text-center mb-13 text-[3.5rem] font-extrabold">Create New Poll</h1>
         
-        <form method="post" class="create-form">
+        <form method="post" class="bg-[#fff9f1] border-2 border-[#c04515] rounded-lg p-7 w-[70%] mx-auto">
             {% csrf_token %}
             
-            <div class="form-group">
-                <label for="id_question_text">Question</label>
+            <div class="mb-4">
+                <label for="id_question_text" class="block text-black mb-0 font-semibold text-[1.4rem]">Question</label>
                 {{ form.question_text }}
             </div>
             
             {{ choice_formset.management_form }}
             
             {% for choice_form in choice_formset %}
-            <div class="form-group">
-                <label>Choice {{ forloop.counter }} </label>
+            <div class="mb-4">
+                <label class="block text-black mb-0 font-semibold text-[1.4rem]">Choice {{ forloop.counter }}</label>
                 {{ choice_form.choice_text }}
             </div>
             {% endfor %}
             
-            <div class="form-buttons">
-                <button type="submit" class="btn">Create Poll</button>
-                <a href="{% url 'polls:index' %}" class="btn btn-secondary">Cancel</a>
+            <div class="mt-[-10px]">
+                <button type="submit" class="bg-white text-[#c05915] border-2 border-[#c04b15] py-2 px-8 text-[1.2rem] font-bold cursor-pointer rounded-[7px] hover:bg-[#fbdfbb] mr-8">
+                    Create Poll
+                </button>
+                <a href="{% url 'polls:index' %}" class="bg-white text-[#c05915] border-2 border-[#c04b15] py-2 px-8 text-[1.2rem] font-bold no-underline rounded-[7px] cursor-pointer hover:bg-[#fbdfbb] mt-5 inline-block">
+                    Cancel
+                </a>
             </div>
         </form>
     </div>

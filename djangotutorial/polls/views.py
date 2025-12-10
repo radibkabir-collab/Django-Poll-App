@@ -6,8 +6,23 @@ from django.urls import reverse_lazy, reverse
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.forms import inlineformset_factory
+from django import forms
 from .models import Question, Choice
 
+
+# Custom widget attrs for styling inputs
+input_attrs = {
+    'class': 'w-full p-2 border-2 border-[#c04515] rounded text-base bg-white'
+}
+
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ['question_text']
+        widgets = {
+            'question_text': forms.TextInput(attrs=input_attrs)
+        }
 
 ChoiceFormSet = inlineformset_factory(
     Question,
@@ -15,6 +30,7 @@ ChoiceFormSet = inlineformset_factory(
     fields=['choice_text'],
     extra=4,
     can_delete=False,
+    widgets={'choice_text': forms.TextInput(attrs=input_attrs)}
 )
 
 ChoiceUpdateFormSet = inlineformset_factory(
@@ -24,6 +40,7 @@ ChoiceUpdateFormSet = inlineformset_factory(
     extra=4,
     max_num=4,
     can_delete=False,
+    widgets={'choice_text': forms.TextInput(attrs=input_attrs)}
 )
 
 
@@ -59,7 +76,7 @@ def vote(request, question_id):
 
 class QuestionCreateView(CreateView):
     model = Question
-    fields = ['question_text']
+    form_class = QuestionForm
     template_name = "polls/create_question.html"
     success_url = reverse_lazy('polls:index')
     
@@ -83,7 +100,7 @@ class QuestionCreateView(CreateView):
 
 class QuestionUpdateView(UpdateView):
     model = Question
-    fields = ['question_text']
+    form_class = QuestionForm
     template_name = "polls/update_question.html"
     success_url = reverse_lazy('polls:index')
     

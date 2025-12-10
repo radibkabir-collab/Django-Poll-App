@@ -1,2 +1,8 @@
 @import "tailwindcss";
 
+@layer base {
+    body {
+        @apply min-h-screen py-8 px-5 font-[Arial,sans-serif] bg-[#fdf3e3] bg-cover bg-center bg-fixed bg-no-repeat;
+        background-image: url('../polls/images/background.jpg');
+    }
+}
