@@ -11,9 +11,9 @@
 </head>
 <body>
     <div class="max-w-[85%] mx-auto">
-        <h1 class="text-[#0a0500] text-center mb-13 text-[3.5rem] font-extrabold">{{ question.question_text }}</h1>
+        <h1 class="text-black text-center mb-13 text-[3.5rem] font-extrabold">{{ question.question_text }}</h1>
 
-        <div class="my-8 mx-auto p-5 border-2 border-[#c04515] rounded-lg bg-white w-[60%]">
+        <div class="my-8 mx-auto p-5 border-2 border-amber-700 rounded-lg bg-white w-[60%]">
             <form action="{% url 'polls:vote' question.id %}" method="post" class="mb-0">
                 {% csrf_token %}
                 
@@ -25,12 +25,12 @@
                 
                 <div class="mb-0 w-full mx-auto">
                     {% for choice in question.choice_set.all %}
-                    <label class="block bg-[#fff9f1] border-2 border-[#c04515] rounded py-2 px-5 mb-2.5 cursor-pointer text-black hover:bg-[#fbdfbb]">
+                    <label class="block bg-[#fff9f1] border-2 border-amber-700 rounded py-2 px-5 mb-2.5 cursor-pointer text-black hover:bg-orange-100">
                         <input type="radio" name="choice" value="{{ choice.id }}" class="mr-2.5">
                         <span>{{ choice.choice_text }}</span>
                     </label>
                     {% endfor %}
-                    <button type="submit" class="bg-white text-[#c05915] border-2 border-[#c04b15] py-2 px-5 text-[1.2rem] font-bold cursor-pointer no-underline rounded-[7px] hover:bg-[#fbdfbb] mt-2">
+                    <button type="submit" class="bg-white text-amber-700 border-2 border-amber-700 py-2 px-5 text-lg font-bold cursor-pointer no-underline rounded-lg hover:bg-[#fbdfbb] mt-2">
                         Vote
                     </button>
                 </div>
@@ -38,24 +38,24 @@
             </form>
         </div>
         
-        <div class="my-8 mx-auto p-5 border-2 border-[#c04515] rounded-lg bg-white w-[60%]">
-            <h2 class="text-[#c04515] mb-4 text-2xl font-bold text-center">Poll Summary</h2>
+        <div class="my-8 mx-auto p-5 border-2 border-amber-700 rounded-lg bg-white w-[60%]">
+            <h2 class="text-amber-700 mb-4 text-2xl font-bold text-center">Poll Summary</h2>
             {% for choice in question.choice_set.all %}
-            <div class="bg-[#fff9f1] border-2 border-[#c04515] rounded py-2.5 px-4 mb-2.5 text-black flex justify-between">
+            <div class="bg-[#fff9f1] border-2 border-amber-700 rounded py-2.5 px-4 mb-2.5 text-black flex justify-between">
                 <span class="font-bold">{{ choice.choice_text }}</span>
                 <span>{{ choice.votes }} vote(s)</span>
             </div>
             {% endfor %}
             
             <div class="flex justify-between mt-5">
-                <a href="{% url 'polls:index' %}" class="bg-white text-[#c05915] border-2 border-[#c04b15] py-2 px-5 text-[1.2rem] font-bold cursor-pointer no-underline rounded-[7px] hover:bg-[#fbdfbb]">
+                <a href="{% url 'polls:index' %}" class="bg-white text-amber-700 border-2 border-amber-700 py-2 px-5 text-lg font-bold cursor-pointer no-underline rounded-lg hover:bg-[#fbdfbb]">
                     Back to Polls
                 </a>
                 <div class="flex gap-2.5">
-                    <a href="{% url 'polls:update' question.id %}" class="bg-[#1565c0] text-white border-2 border-black py-2 px-5 text-[1.2rem] font-bold cursor-pointer no-underline rounded-[7px] hover:bg-[#0d47a1]">
+                    <a href="{% url 'polls:update' question.id %}" class="bg-blue-700 text-white border-2 border-black py-2 px-5 text-lg font-bold cursor-pointer no-underline rounded-lg hover:bg-blue-900">
                         Update Poll
                     </a>
-                    <a href="{% url 'polls:delete' question.id %}" class="bg-[#c2001d] text-white border-2 border-black py-2 px-5 text-[1.2rem] font-bold cursor-pointer no-underline rounded-[7px] hover:bg-[#7e0000]">
+                    <a href="{% url 'polls:delete' question.id %}" class="bg-red-700 text-white border-2 border-black py-2 px-5 text-lg font-bold cursor-pointer no-underline rounded-lg hover:bg-red-900">
                         Delete Poll
                     </a>
                 </div>

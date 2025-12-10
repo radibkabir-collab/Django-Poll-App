@@ -18,10 +18,10 @@
             
             <form method="post" class="flex justify-center gap-5">
                 {% csrf_token %}
-                <a href="{% url 'polls:index' %}" class="bg-white text-[#c05915] border-2 border-[#c04b15] py-2 px-5 text-[1.2rem] font-bold cursor-pointer no-underline rounded-[7px] hover:bg-[#fbdfbb]">
+                <a href="{% url 'polls:index' %}" class="bg-white text-amber-700 border-2 border-amber-700 py-2 px-5 text-lg font-bold cursor-pointer no-underline rounded-lg hover:bg-orange-100">
                     Cancel
                 </a>
-                <button type="submit" class="bg-[#c2001d] text-white border-2 border-black py-2 px-5 text-[1.2rem] font-bold cursor-pointer rounded-[7px] hover:bg-[#7e0000]">
+                <button type="submit" class="bg-red-700 text-white border-2 border-black py-2 px-5 text-lg font-bold cursor-pointer rounded-lg hover:bg-red-800">
                     Delete
                 </button>
             </form>

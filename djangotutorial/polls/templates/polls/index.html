@@ -15,18 +15,18 @@
         
         <div class="flex flex-wrap justify-start gap-14">
             {% for question in latest_question_list %}
-            <div class="bg-[#fdf3e3] border-4 border-[#c06215] rounded-[15px] py-8 px-10 w-[22%] min-w-[22%] h-80 flex flex-col justify-between items-center">
+            <div class="bg-orange-50 border-4 border-amber-700 rounded-2xl py-8 px-10 w-[22%] min-w-[22%] h-80 flex flex-col justify-between items-center">
                 <h2 class="text-black text-[1.8rem] text-center mb-4 font-bold">{{ question.question_text }}</h2>
                 <a href="{% url 'polls:detail' question.id %}" 
-                   class="bg-white text-[#c05915] border-2 border-[#c04b15] py-2 px-5 text-[1.2rem] font-bold no-underline rounded-[7px] cursor-pointer hover:bg-[#fbdfbb]">
+                   class="bg-white text-[#c05915] border-2 border-amber-700 py-2 px-5 text-lg font-bold no-underline rounded-lg cursor-pointer hover:bg-[#fbdfbb]">
                     Vote Now
                 </a>
             </div>
             {% endfor %}
 
             <a href="{% url 'polls:create' %}" 
-               class="bg-[#fdf3e3] border-4 border-[#c06215] rounded-[15px] p-10 w-[22%] min-w-[22%] h-80 flex justify-center items-center no-underline cursor-pointer hover:bg-[#fbdfbb]">
-                <span class="text-[5rem] text-[#c04515] font-bold">+</span>
+               class="bg-orange-50 border-4 border-amber-700 rounded-2xl p-10 w-[22%] min-w-[22%] h-80 flex justify-center items-center no-underline cursor-pointer hover:bg-[#fbdfbb]">
+                <span class="text-[5rem] text-amber-700 font-bold">+</span>
             </a>
         </div>
         

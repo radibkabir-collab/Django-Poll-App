@@ -13,7 +13,7 @@
     <div class="max-w-[85%] mx-auto">
         <h1 class="text-[#0a0500] text-center mb-13 text-[3.5rem] font-extrabold">Update Poll</h1>
         
-        <form method="post" class="bg-[#fff9f1] border-2 border-[#c04515] rounded-lg p-7 w-[70%] mx-auto">
+        <form method="post" class="bg-[#fff9f1] border-2 border-amber-700 rounded-lg p-7 w-[70%] mx-auto">
             {% csrf_token %}
             
             <div class="mb-4">
@@ -31,11 +31,11 @@
             </div>
             {% endfor %}
             
-            <div class="mt-[-10px]">
-                <button type="submit" class="bg-white text-[#c05915] border-2 border-[#c04b15] py-2 px-8 text-[1.2rem] font-bold cursor-pointer rounded-[7px] hover:bg-[#fbdfbb] mr-8">
+            <div class="-mt-2.5">
+                <button type="submit" class="bg-white text-amber-700 border-2 border-amber-700 py-2 px-8 text-lg font-bold cursor-pointer rounded-lg hover:bg-orange-100 mr-8">
                     Update Poll
                 </button>
-                <a href="{% url 'polls:index' %}" class="bg-white text-[#c05915] border-2 border-[#c04b15] py-2 px-8 text-[1.2rem] font-bold no-underline rounded-[7px] cursor-pointer hover:bg-[#fbdfbb] mt-5 inline-block">
+                <a href="{% url 'polls:index' %}" class="bg-white text-amber-700 border-2 border-amber-700 py-2 px-8 text-lg font-bold rounded-lg cursor-pointer hover:bg-orange-100 mt-5 inline-block">
                     Cancel
                 </a>
             </div>
