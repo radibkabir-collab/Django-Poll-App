@@ -10,28 +10,28 @@
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
 </head>
 <body>
-    <div class="max-w-[85%] mx-auto">
-        <h1 class="text-[#0a0500] text-center mb-13 text-[3.5rem] font-extrabold">Polls</h1>
+    <div class="w-[95%] sm:w-[90%] lg:max-w-[85%] mx-auto">
+        <h1 class="text-black text-center mb-8 sm:mb-10 lg:mb-13 text-2xl sm:text-4xl lg:text-[3.5rem] font-extrabold">Polls</h1>
         
-        <div class="flex flex-wrap justify-start gap-14">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 xl:gap-14">
             {% for question in latest_question_list %}
-            <div class="bg-orange-50 border-4 border-amber-700 rounded-2xl py-8 px-10 w-[22%] min-w-[22%] h-80 flex flex-col justify-between items-center">
-                <h2 class="text-black text-[1.8rem] text-center mb-4 font-bold">{{ question.question_text }}</h2>
+            <div class="bg-orange-50 border-4 border-amber-700 rounded-2xl py-6 px-6 sm:py-8 sm:px-10 min-h-48 sm:min-h-72 lg:min-h-80 flex flex-col justify-between items-center">
+                <h2 class="text-black text-xl sm:text-2xl lg:text-[1.8rem] text-center mb-4 font-bold">{{ question.question_text }}</h2>
                 <a href="{% url 'polls:detail' question.id %}" 
-                   class="bg-white text-[#c05915] border-2 border-amber-700 py-2 px-5 text-lg font-bold no-underline rounded-lg cursor-pointer hover:bg-[#fbdfbb]">
+                   class="bg-white text-amber-700 border sm:border-2 border-amber-700 py-2 px-4 sm:px-5 text-base sm:text-lg font-bold no-underline rounded-lg cursor-pointer hover:bg-orange-100 text-center">
                     Vote Now
                 </a>
             </div>
             {% endfor %}
 
             <a href="{% url 'polls:create' %}" 
-               class="bg-orange-50 border-4 border-amber-700 rounded-2xl p-10 w-[22%] min-w-[22%] h-80 flex justify-center items-center no-underline cursor-pointer hover:bg-[#fbdfbb]">
-                <span class="text-[5rem] text-amber-700 font-bold">+</span>
+               class="bg-orange-50 border-4 border-amber-700 rounded-2xl p-10 min-h-48 sm:min-h-72 lg:min-h-80 flex justify-center items-center no-underline cursor-pointer hover:bg-orange-100">
+                <span class="text-5xl sm:text-6xl lg:text-[5rem] text-amber-700 font-bold">+</span>
             </a>
         </div>
         
         {% if not latest_question_list %}
-        <p class="text-black bg-[#fff9f1d8] border-[3px] border-black rounded-lg mx-auto max-w-[60%] p-5 text-[2.5rem] text-center mt-5">
+        <p class="text-black bg-[#fff9f1d8] border-[3px] border-black rounded-lg mx-auto w-full sm:max-w-[80%] lg:max-w-[60%] p-4 sm:p-5 text-lg sm:text-2xl lg:text-[2.5rem] text-center mt-5">
             No polls available. Click the + card to create one!
         </p>
         {% endif %}
