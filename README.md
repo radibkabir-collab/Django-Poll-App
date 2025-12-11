@@ -12,8 +12,8 @@ A simple polling application built with Django. Users can create or update polls
 ## Tech Stack
 
 - **Backend:** Django (Python)
-- **Frontend:** HTML, CSS
-- **Database:** SQLite (default)
+- **Frontend:** HTML, Tailwind CSS
+- **Database:** PostgreSQL
 
 ## Features
 
@@ -46,6 +46,42 @@ Edit an existing poll's question and choices. After updating the vote count will
 Remove a poll with a confirmation dialog.
 
 ![Delete Poll](Screenshots/poll-delete.png)
+
+---
+
+## 📱 Mobile Responsive Design
+
+The app is fully responsive and works seamlessly on mobile devices.
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="Screenshots/mob-poll-index.png" alt="Mobile Poll Index" width="250"><br>
+      <b>Poll Index</b>
+    </td>
+    <td align="center">
+      <img src="Screenshots/mob-poll-create.png" alt="Mobile Create Poll" width="250"><br>
+      <b>Create Poll</b>
+    </td>
+    <td align="center">
+      <img src="Screenshots/mob-poll-details.png" alt="Mobile Poll Details" width="250"><br>
+      <b>Poll Details</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="Screenshots/mob-poll-update.png" alt="Mobile Update Poll" width="250"><br>
+      <b>Update Poll</b>
+    </td>
+    <td align="center">
+      <img src="Screenshots/mob-poll-delete.png" alt="Mobile Delete Poll" width="250"><br>
+      <b>Delete Poll</b>
+    </td>
+    <td></td>
+  </tr>
+</table>
+
+---
 
 ## Getting Started
 
